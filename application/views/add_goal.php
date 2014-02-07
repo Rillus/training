@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-</head>
-<body>
-
 <form id="goal_set">
 	I want to
 	<select name="action">
@@ -45,6 +37,3 @@
 		in <input type="text" name="run_time" placeholder="0"> minutes
 	<?php } ?>
 </form>
-
-</body>
-</html>
