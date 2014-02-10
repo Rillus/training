@@ -6,15 +6,14 @@ class Action extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->database();
-		//$this->load->library('session');
 		$this->load->model('Viewmodel');
 	}
-	public function index()
+	public function index($type = "")
 	{		
-		$this->Viewmodel->displayPage('action');
+		//echo 'action/'+$type;
+		$this->Viewmodel->displayPage('add_goal');
 	}
-	public function action($type) {
-		echo 'here';
-		$this->Viewmodel->displayPage('action/'+$type);
+	public function actions($type) {
+		$this->Viewmodel->displayPage('action/'.$type);
 	}
 }

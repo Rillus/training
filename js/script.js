@@ -202,6 +202,7 @@ $(document).ready(function(){
 	
 	/* ------- Ajax page loading ------ */
 	function requestView(url, el, changePage){
+		console.log('getting page :'+url);
 		if (document.URL == url){
 			return;
 		}
