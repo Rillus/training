@@ -17,5 +17,9 @@
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
         <![endif]-->
+
+        <script type="text/javascript">
+            var baseUrl = "<?php echo site_url(); ?>/";
+        </script>
     </head>
     <body>
