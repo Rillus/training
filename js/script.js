@@ -229,6 +229,8 @@ $(document).ready(function(){
 						window.history.pushState({
 							"html":result //, "pageTitle":response.pageTitle
 						},"", requestUrl);
+					} else {
+						getDataTypes();
 					}
 				},
 				fail: function() {
