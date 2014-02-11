@@ -143,9 +143,20 @@ $(document).ready(function(){
 	$('form').on("submit", function(e){
 		var el = $(this);
 		runValidation(el.attr('id'));
-		if (isValid() === true){
-			return;
-		}
 		e.preventDefault();
+		if (isValid() === true){
+			var url = el.attr('action');
+			console.log(el.serialize());
+		    $.ajax({
+		           type: "POST",
+		           url: url,
+		           data: el.serialize(), // serializes the form's elements.
+		           success: function(data) {
+		               console.log(data); // show response from the php script.
+		           }
+		         });
+
+		    return false; // avoid to execute the actual submit of the form.
+		}
 	});
 });

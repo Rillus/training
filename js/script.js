@@ -246,7 +246,8 @@ $(document).ready(function(){
 			requestView(href, $("#contain"));
 		}
 	})
-	/* ------- Ajax for dashboard ------ */
+
+	// ------- Ajax for getting and setting goals ------ //
 	if ($("#goal-set").length > 0){
 		console.log('goal setter');
 		$('#action').change(function(e){
@@ -254,6 +255,13 @@ $(document).ready(function(){
 			requestView(baseUrl+"action/"+val, $("#action-control"), false);
 		});
 	}
+
+	if ($("#goals").length > 0){
+		console.log('goal loader');	
+		var userId = $('#goals').data('user')
+		requestView(baseUrl+"user/"+userId, $("#goals"), false);
+	}
+
 	// this triggers page load on back button
 	window.onpopstate = function(e){
 		if(e.state){
