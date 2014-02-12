@@ -4,12 +4,9 @@ var validate = {
 	'required' : function(el) {
 		var value = el.val(),
 			message = "This field is required.";
-			console.log('required error message');
 		if (value == ""){
 			validate.errorMessage(message, el);
-			console.log('required error message');
 		} else {
-			console.log('removed required error message '+value);
 			validate.removeError(el);
 		}
 	},
@@ -65,7 +62,6 @@ var validate = {
 	},
 	'errorMessage' : function(message, el){
 		message = validationText.replace('{{message}}', message);
-		console.log('error message');
 		if (! el.parents().next().hasClass('alert')){
 			el.parents('label').after(message);
 			console.log('error message added');
@@ -84,20 +80,17 @@ function getDataTypes(){
 		var dataType = $(this).data("type"),
 			dataRequired = $(this).data("required"),
 			el = $(this);
-			console.log('required');
 		
 		
 		if ((dataRequired != "undefined") && (dataRequired != "") && (dataRequired == true)){ // check the field has a data-type attribute
 			el.focusout(function(){
 				validate.required(el);
-				console.log('required '+el);
 			});
 		}
 		if ((dataType != "undefined") && (dataType != "")){ // check the field has a data-type attribute
 			el.focusout(function(){ // validate when input field loses focus
 				if (typeof(validate[dataType]) != "undefined") { // check the function exists!
 					validate[dataType](el); // validate the field
-					console.log(dataType, el);
 				}
 			})
 		}
@@ -105,7 +98,6 @@ function getDataTypes(){
 };
 
 function runValidation(form){
-	console.log(form);
 	if(form === undefined) { 
 		form = "";
 	} else {
@@ -115,48 +107,48 @@ function runValidation(form){
 		var dataType = $(this).data("type"),
 			dataRequired = $(this).data("required"),
 			el = $(this);
-			console.log('required');
 
 		if ((dataRequired != "undefined") && (dataRequired != "") && (dataRequired == true)){ // check the field has a data-type attribute
 			validate.required(el);
-			console.log('required '+el);
 		}
 		if ((dataType != "undefined") && (dataType != "")){ // check the field has a data-type attribute
 			if (typeof(validate[dataType]) != "undefined") { // check the function exists!
 				validate[dataType](el); // validate the field
-				console.log(dataType, el);
 			}
 		}
 	})
 }
 
-function isValid(){
-	if ($('.alert').length > 0) {
+function isValid(el){
+	if ($(el).find('.alert').length > 0) {
 		return false;
 	}
 	return true;
 }
-
-$(document).ready(function(){
+function setupValidation(){
 	getDataTypes();
-	console.log('validate form');
 	$('form').on("submit", function(e){
 		var el = $(this);
 		runValidation(el.attr('id'));
 		e.preventDefault();
-		if (isValid() === true){
+		if (isValid(el) === true){
+			console.log('form submit');
 			var url = el.attr('action');
-			console.log(el.serialize());
 		    $.ajax({
-		           type: "POST",
-		           url: url,
-		           data: el.serialize(), // serializes the form's elements.
-		           success: function(data) {
-		               console.log(data); // show response from the php script.
-		           }
-		         });
+	            type: "POST",
+	            url: url,
+	            data: el.serialize(), // serializes the form's elements.
+	            success: function(data) {
+	               	console.log(data); // show response from the php script.
+	                location.reload(true);
+	           	}
+	        });
 
 		    return false; // avoid to execute the actual submit of the form.
 		}
 	});
+}
+
+$(document).ready(function(){
+	setupValidation();
 });

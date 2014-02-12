@@ -226,11 +226,12 @@ $(document).ready(function(){
 							$("body").attr('class',segments[6]);
 						}
 						//document.title = response.pageTitle;
-						window.history.pushState({
-							"html":result //, "pageTitle":response.pageTitle
-						},"", requestUrl);
+						// window.history.pushState({
+						// 	"html":result //, "pageTitle":response.pageTitle
+						// },"", requestUrl);
 					} else {
-						getDataTypes();
+						setupValidation();
+						console.log('reinitialise vaidation')
 					}
 				},
 				fail: function() {
@@ -241,11 +242,18 @@ $(document).ready(function(){
 	}
 	$(document).on("click", "a.load", function(e){
 		e.preventDefault();
-		var href = $(this).attr("href");
+		var href = $(this).attr("href")
+			el = $(this);
 		if (href != "#"){
-			requestView(href, $("#contain"));
+			requestView(href, el.next(".holder"), false);
 		}
 	})
+
+	$(document).on("click", "a.show-next", function(e){
+		e.preventDefault();
+		console.log($(this).next('.hidden'));
+		$(this).next('.hidden').show();
+	});
 
 	// ------- Ajax for getting and setting goals ------ //
 	if ($("#goal-set").length > 0){

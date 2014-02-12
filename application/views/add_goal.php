@@ -1,7 +1,6 @@
-<form id="goals" data-user="1">
-</form>
 
-<form id="goal-set" action="<?php echo site_url(); ?>/add/goal">
+<a href="#" class="show-next">Set new challenge</a>
+<form id="goal-set" class="hidden" action="<?php echo site_url(); ?>/add/goal">
 	<fieldset>
 	    <legend>Add a new goal</legend>
 		<label>
@@ -19,7 +18,10 @@
 		<div id="action-control"></div>
 		<input name="user_id" value="1" type="hidden">
 		<button type="submit">Add goal</button>
-	<fieldset>
+	</fieldset>
+</form>
+
+<form id="goals" data-user="1">
 </form>
 
 <form id="goal-update">

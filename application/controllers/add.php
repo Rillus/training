@@ -11,9 +11,30 @@ class Add extends CI_Controller {
 	public function index($type = "")
 	{		
 		//echo 'action/'+$type;
-		$this->Viewmodel->displayPage('goals');
+		$this->Viewmodel->displayPage('add_goal1');
 	}
 	public function goal() {
 		$this->db->insert('goals', $_POST);
+	}
+	public function milestone($type) {
+		$this->db->where('type', $type);
+		$actions = $this->db->get('actions', 1);
+		$action = $actions->row();
+
+		$actionArray = array (
+			'type' => $action->type,
+			'val1_unit' => $action->val1_unit,
+			'conjunctive' => $action->conjunctive,
+			'val2_unit' => $action->val2_unit
+		);
+
+		$data['type'] = $type;
+		$data['action'] = $actionArray;
+
+		$this->Viewmodel->displayPage('milestone/'.$type, $data);
+	}
+	public function update() {
+		print_r($_POST);
+		//$this->db->insert('milestones', $_POST);
 	}
 }

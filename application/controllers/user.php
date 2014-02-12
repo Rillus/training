@@ -21,6 +21,7 @@ class User extends CI_Controller {
 		foreach($actions->result() as $action){
 			$actionArray[$action->type] = array (
 				'val1_unit' => $action->val1_unit,
+				'conjunctive' => $action->conjunctive,
 				'val2_unit' => $action->val2_unit
 			);
 		}
