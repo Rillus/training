@@ -10,8 +10,8 @@ I want to...
 		echo $goal->val2; 
 		echo $actions[$goal->action]['val2_unit']; 
 		?>
-		<a href="<?php echo site_url(); ?>" class="load">Delete</a>
-		<a href="<?php echo site_url(); ?>/add/milestone/<?php echo $goal->action; ?>" class="load">Add milestone</a>
+		<a href="<?php echo site_url('delete/'.$goal->id.'/'.1); ?>" class="load">Delete</a>
+		<a href="<?php echo site_url('add/milestone/'.$goal->action); ?>" class="load">Add milestone</a>
 		<div class="holder"></div>
 	</li>
 <?php } ?>
