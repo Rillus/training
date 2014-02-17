@@ -213,7 +213,6 @@ $(document).ready(function(){
 				dataType: "html",
 				url: requestUrl,
 				success: function(result) {
-					console.log(result);
 					requestPending = false;
 					el.hide().empty().append(result).fadeIn();
 					//update body id and class
@@ -230,13 +229,14 @@ $(document).ready(function(){
 						// 	"html":result //, "pageTitle":response.pageTitle
 						// },"", requestUrl);
 					} else {
+						console.log(result);
 						if (result == "refresh"){
 							location.reload(true);
 						}
 
-						// if ($(".chart").length > 0){
-						// 	drawChart();
-						// }
+						if ($(".chart").length > 0){
+							drawChart();
+						}
 						setupValidation();
 					}
 				},
@@ -251,7 +251,7 @@ $(document).ready(function(){
 		var href = $(this).attr("href")
 			el = $(this);
 		if (href != "#"){
-			requestView(href, el.next(".holder"), false);
+			requestView(href, el.nextAll(".holder"), false);
 		}
 	})
 

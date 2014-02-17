@@ -13,8 +13,7 @@ I want to...
 		<a href="<?php echo site_url('delete/'.$goal->id.'/1'); ?>" class="load reload">Delete</a>
 		<a href="<?php echo site_url('add/milestone/'.$goal->action.'/'.$goal->id); ?>" class="load">Add milestone</a>
 		<a href="<?php echo site_url('data/'.$goal->id); ?>" class="load graph">View graph</a>
-		<form action="<?php echo site_url(); ?>/add/update" class="holder">
-		</form>
+		<div class="holder"></div>
 	</li>
 <?php } ?>
 </ul>

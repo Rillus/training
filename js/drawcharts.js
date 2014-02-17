@@ -2,7 +2,7 @@ function drawChart(){
 	var dataArray = new Array();
 
 	$('.chartdata li').each(function(){
-		dataArray.push($(this).html());
+		dataArray.push(parseFloat($(this).html()));
 	});
 	console.log(dataArray);
 

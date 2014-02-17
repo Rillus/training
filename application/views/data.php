@@ -3,9 +3,9 @@
 	<li>
 		<?php 
 		echo $item->val1;
-		echo $item->val2; 
+		//echo $item->val2; 
 		?>
 	</li>
 <?php } ?>
 </ul>
-<canvas class="chart" width="400" height="400"></canvas>
+<canvas class="chart" width="250" height="150"></canvas>
