@@ -1,5 +1,6 @@
 var validationText ='<div class="alert alert-error"><button class="close" data-dismiss="alert" type="button" tabindex="-1">&times;</button>{{message}}</div>';
-
+var running = false;
+	
 var validate = {
 	'required' : function(el) {
 		var value = el.val(),
@@ -122,30 +123,37 @@ function runValidation(form){
 function isValid(el){
 	if ($(el).find('.alert').length > 0) {
 		return false;
+	} else {
+		return true;
 	}
-	return true;
 }
 function setupValidation(){
 	getDataTypes();
-	$('form').on("submit", function(e){
-		var el = $(this);
-		runValidation(el.attr('id'));
-		e.preventDefault();
-		if (isValid(el) === true){
-			console.log('form submit');
-			var url = el.attr('action');
-		    $.ajax({
-	            type: "POST",
-	            url: url,
-	            data: el.serialize(), // serializes the form's elements.
-	            success: function(data) {
-	               	console.log(data); // show response from the php script.
-	                location.reload(true);
-	           	}
-	        });
+	if (running == true){
+		return false;
+	}
+	running = true;
 
-		    return false; // avoid to execute the actual submit of the form.
-		}
+	//$('form').on("submit", function(e){
+	$(document.body).on('click', "[type='submit']", function(e){
+		e.preventDefault();
+		var el = $(this).parents('form');
+		runValidation(el.attr('id'));
+		//var timeout = window.setTimeout(function(){
+			if (isValid(el) === true){
+				console.log('form submit');
+				var url = el.attr('action');
+			    $.ajax({
+		            type: "POST",
+		            url: url,
+		            data: el.serialize(), // serializes the form's elements.
+		            success: function(data) {
+		               	console.log(data); // show response from the php script.
+		                location.reload(true);
+		           	}
+		        });
+			}
+		//}, 1000);
 	});
 }
 

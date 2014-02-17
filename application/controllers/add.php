@@ -16,7 +16,7 @@ class Add extends CI_Controller {
 	public function goal() {
 		$this->db->insert('goals', $_POST);
 	}
-	public function milestone($type) {
+	public function milestone($type, $goalId) {
 		$this->db->where('type', $type);
 		$actions = $this->db->get('actions', 1);
 		$action = $actions->row();
@@ -30,11 +30,12 @@ class Add extends CI_Controller {
 
 		$data['type'] = $type;
 		$data['action'] = $actionArray;
+		$data['goalId'] = $goalId;
 
 		$this->Viewmodel->displayPage('milestone/'.$type, $data);
 	}
 	public function update() {
-		print_r($_POST);
-		//$this->db->insert('milestones', $_POST);
+		//print_r($_POST);
+		$this->db->insert('milestones', $_POST);
 	}
 }

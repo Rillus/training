@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Delete extends CI_Controller {
+class Data extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->helper('url');
@@ -13,14 +13,12 @@ class Delete extends CI_Controller {
 		//echo 'action/'+$type;
 		$this->Viewmodel->displayPage('add_goal1');
 	}
-	public function deleter($id, $userId) {
-		$this->db->where('id', $id);
-		$this->db->where('user_id', $userId);
-		$this->db->delete('goals');
-		echo "refresh";
-	}
-	public function update() {
-		print_r($_POST);
-		//$this->db->insert('milestones', $_POST);
+	public function get($goalId) {
+		$this->db->where('goal_id', $goalId);
+		$datapoints = $this->db->get('milestones');
+		
+		$data['data'] = $datapoints;
+		
+		$this->Viewmodel->displayPage('data', $data);
 	}
 }

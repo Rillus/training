@@ -192,7 +192,6 @@ $(document).ready(function(){
 	
 	if ($(".deleter").length > 0){
 		$(document).on("click", ".deleter", function(e){
-			console.log('deleter');
 			jVal.deleteRow($(this));
 		});
 	}
@@ -214,6 +213,7 @@ $(document).ready(function(){
 				dataType: "html",
 				url: requestUrl,
 				success: function(result) {
+					console.log(result);
 					requestPending = false;
 					el.hide().empty().append(result).fadeIn();
 					//update body id and class
@@ -230,8 +230,14 @@ $(document).ready(function(){
 						// 	"html":result //, "pageTitle":response.pageTitle
 						// },"", requestUrl);
 					} else {
+						if (result == "refresh"){
+							location.reload(true);
+						}
+
+						// if ($(".chart").length > 0){
+						// 	drawChart();
+						// }
 						setupValidation();
-						console.log('reinitialise vaidation')
 					}
 				},
 				fail: function() {
@@ -251,13 +257,11 @@ $(document).ready(function(){
 
 	$(document).on("click", "a.show-next", function(e){
 		e.preventDefault();
-		console.log($(this).next('.hidden'));
 		$(this).next('.hidden').show();
 	});
 
 	// ------- Ajax for getting and setting goals ------ //
 	if ($("#goal-set").length > 0){
-		console.log('goal setter');
 		$('#action').change(function(e){
 			var val = $('#action').val()
 			requestView(baseUrl+"action/"+val, $("#action-control"), false);
@@ -265,7 +269,6 @@ $(document).ready(function(){
 	}
 
 	if ($("#goals").length > 0){
-		console.log('goal loader');	
 		var userId = $('#goals').data('user')
 		requestView(baseUrl+"user/"+userId, $("#goals"), false);
 	}

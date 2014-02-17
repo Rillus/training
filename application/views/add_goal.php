@@ -21,8 +21,8 @@
 	</fieldset>
 </form>
 
-<form id="goals" data-user="1">
-</form>
+<div id="goals" data-user="1">
+</div>
 
-<form id="goal-update">
-</form>
+<div id="goal-update">
+</div>
