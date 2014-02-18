@@ -7,12 +7,12 @@
 			By <input name="goal_date" value="30/05/2014" disabled>
 		</label>
 		<label>
-			I want to have
-			<select name="action" id="action" data-required="true">
+			I want to
+			<select name="action_id" id="action" data-required="true">
 				<option value="">--</option>
-				<option value="run">run</option>
-				<option value="lose">lost</option>
-				<option value="gain">gained</option>
+				<?php foreach($actions->result() as $action){ ?>
+					<option value="<?php echo $action->id; ?>"><?php echo $action->type; ?></option>
+				<?php } ?>
 			</select>
 		</label>
 		<div id="action-control"></div>
@@ -22,7 +22,4 @@
 </form>
 
 <div id="goals" data-user="1">
-</div>
-
-<div id="goal-update">
 </div>

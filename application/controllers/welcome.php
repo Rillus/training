@@ -12,6 +12,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{		
-		$this->Viewmodel->displayPage('add_goal');
+		$data['actions'] = $this->db->get('actions');
+		$this->Viewmodel->displayPage('add_goal', $data);
 	}
 }

@@ -19,7 +19,8 @@ class User extends CI_Controller {
 		
 		$actions = $this->db->get('actions');
 		foreach($actions->result() as $action){
-			$actionArray[$action->type] = array (
+			$actionArray[$action->id] = array (
+				'type' => $action->type,
 				'val1_unit' => $action->val1_unit,
 				'conjunctive' => $action->conjunctive,
 				'val2_unit' => $action->val2_unit

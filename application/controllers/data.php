@@ -5,6 +5,7 @@ class Data extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->helper('date');
 		$this->load->database();
 		$this->load->model('Viewmodel');
 	}
@@ -18,7 +19,28 @@ class Data extends CI_Controller {
 		$datapoints = $this->db->get('milestones');
 		
 		$data['data'] = $datapoints;
-		
+
+		$this->db->where('id', $goalId);
+		$goal = $this->db->get('goals', 1);
+		$goal = $goal->row();
+
+		$goalArray = array (
+			'start_date' => $goal->start_date,
+			'end_date' => $goal->end_date
+		);
+		$data['goal'] = $goalArray;
+
+		$actions = $this->db->get('actions');
+		foreach($actions->result() as $action){
+			$actionArray[$action->id] = array (
+				'type' => $action->type,
+				'val1_unit' => $action->val1_unit,
+				'conjunctive' => $action->conjunctive,
+				'val2_unit' => $action->val2_unit,
+			);
+		}
+		$data['actions'] = $actionArray;
+
 		$this->Viewmodel->displayPage('data', $data);
 	}
 }
