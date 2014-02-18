@@ -25,6 +25,8 @@ class Data extends CI_Controller {
 		$goal = $goal->row();
 
 		$goalArray = array (
+			'val1' => $goal->val1,
+			'val2' => $goal->val2,
 			'start_date' => $goal->start_date,
 			'end_date' => $goal->end_date
 		);

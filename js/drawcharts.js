@@ -1,32 +1,36 @@
 function drawChart(){
 	var dataArray = new Array(),
-		//days = parseFloat($('.days').html()),
 		date = $('.date').html(),
 		end = $('.end').html(),
-		start = $('.start').html();
+		start = $('.start').html(),
+		goal1 = $('.val1-target').html(),
+		goal2 = $('.val2-target').html();
 		
 
 	end = new Date(end);
 	start = new Date(start);
-	var //datediff = end - start,
-		oneDay = 24*60*60*1000;
-	datediff = Math.round(Math.abs((end.getTime() - start.getTime())/(oneDay)));
-	//Math.floor(datediff/(60*60*24));
-	var dayLabels = new Array(datediff);
-	console.log(datediff);
+	
+	dateDiff = getDayDifference(start, end);
+	var dayLabels = new Array(dateDiff);
+	console.log(dateDiff);
 
-	$('.chartdata li li').each(function(){
-		
-		dataArray.push(parseFloat($(this).html()));
+	$('.chartdata li ul').each(function(){
+		var date = new Date($(this).find('.date').html()),
+			thisdateDiff = dateDiff - getDayDifference(date, end);
 
+		dataArray[thisdateDiff] = parseFloat($(this).find('.val1').html()/$(this).find('.val2').html());
+		console.log(thisdateDiff, date);
 	});
-	console.log(dataArray);
 
 
 	for(var i=0;i<dayLabels.length;i++){
 	  	dayLabels[i] = i+1;
-	  	console.log(dayLabels[i]);
 	}
+
+	var goalLine = new Array(dateDiff);
+
+	goalLine[0] = 0;
+	goalLine[dateDiff] = goal1;
 
 	var data = {
 		labels : dayLabels,
@@ -37,6 +41,13 @@ function drawChart(){
 				pointColor : "rgba(220,220,220,1)",
 				pointStrokeColor : "#fff",
 				data : dataArray
+			},
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(0,0,0,1)",
+				pointColor : "rgba(0,0,0,1)",
+				pointStrokeColor : "#ccc",
+				data : goalLine
 			}
 		]
 	}
@@ -131,3 +142,9 @@ function drawChart(){
 	new Chart(ctx).Line(data);
 
 };
+
+function getDayDifference(start, end){
+	var oneDay = 24*60*60*1000;
+
+	return Math.round(Math.abs((end.getTime() - start.getTime())/(oneDay)));
+}
