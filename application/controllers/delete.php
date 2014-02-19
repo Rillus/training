@@ -17,6 +17,10 @@ class Delete extends CI_Controller {
 		$this->db->where('id', $id);
 		$this->db->where('user_id', $userId);
 		$this->db->delete('goals');
+
+		$this->db->where('goal_id', $id);
+		$this->db->where('user_id', $userId);
+		$this->db->delete('milestones');
 		echo "refresh";
 	}
 	public function update() {

@@ -42,6 +42,9 @@ class Data extends CI_Controller {
 				'val2_unit' => $action->val2_unit,
 			);
 		}
+		// print_r($goalArray);
+		// print_r($actionArray);
+		// print_r($data['data']);
 		$data['actions'] = $actionArray;
 
 		$this->Viewmodel->displayPage('data', $data);

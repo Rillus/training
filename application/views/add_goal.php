@@ -1,4 +1,4 @@
-
+<?php $userId = 1; ?>
 <a href="#" class="show-next">Set new challenge</a>
 <form id="goal-set" class="hidden" action="<?php echo site_url(); ?>/add/goal">
 	<fieldset>
@@ -16,10 +16,10 @@
 			</select>
 		</label>
 		<div id="action-control"></div>
-		<input name="user_id" value="1" type="hidden">
+		<input name="user_id" value="<?php echo $userId; ?>" type="hidden">
 		<button type="submit">Add goal</button>
 	</fieldset>
 </form>
 
-<div id="goals" data-user="1">
+<div id="goals" data-user="<?php echo $userId; ?>">
 </div>
