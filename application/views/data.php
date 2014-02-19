@@ -1,4 +1,4 @@
-<ul class="chartdata">
+<ul class="chartdata" style="display:none">
 	<?php foreach($data->result() as $item){ ?>
 		<li>
 			<span class="action"><?php echo $actions[$item->action_id]['type']; ?></span>
@@ -22,4 +22,5 @@
 		</li>
 	<?php } ?>
 </ul>
-<canvas class="chart" width="250" height="150"></canvas>
+<canvas class="chart" width="0" height="0"></canvas>
+<div id="chart" style="width:100%; height:400px;"></div>

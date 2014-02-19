@@ -16,6 +16,7 @@ class Data extends CI_Controller {
 	}
 	public function get($goalId) {
 		$this->db->where('goal_id', $goalId);
+		$this->db->order_by('date');
 		$datapoints = $this->db->get('milestones');
 		
 		$data['data'] = $datapoints;
